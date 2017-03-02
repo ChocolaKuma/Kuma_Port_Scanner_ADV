@@ -17,11 +17,12 @@ iplock = ip1 + "." + ip2 + "."+ ip3 + "." + str(ip4)
 
 def setUp():
     global s,ip,STARTPORT,ENDPORT,ip1,ip2,ip3,ip4,ALLIPSINRANGE,GUI
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
     print("")
     
     GUIq = 999
     while GUIq != 1 and GUIq !=0:
+        
         GUIq = int(input("Do you want GUI enabled? (0)False(1)True\n"))
         if (GUIq != 1 and GUIq !=0):
             print("Not Accaptable Mode")
@@ -67,6 +68,7 @@ def portScanner():
 
         ip = ip1 + "." + ip2 + "."+ ip3 + "." + str(ip4)
         for np in range(STARTPORT, ENDPORT + 1):
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             #if in while loop could DDOS
             try:
                 s.connect((ip,np))
@@ -80,6 +82,7 @@ def portScanner():
                 np = np +1
                 if (ALLIPSINRANGE == False):
                     ip4 = 9999
+            s.close
         if(ALLIPSINRANGE == True):
             ip4 = ip4 + 1
 
